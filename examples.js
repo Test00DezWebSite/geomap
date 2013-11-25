@@ -42,7 +42,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFEE00"
                                                             },
-                                                            label :"1"
+                                                            label :"1->3"
                                                     },
                                                     {
                                                             min: 4,
@@ -50,7 +50,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFDD00"
                                                             },
-                                                            label :"2"
+                                                            label :"5->6"
                                                     },
                                                     
                                                     {
@@ -59,7 +59,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFCC00"
                                                             },
-                                                            label :"3"
+                                                            label :"7->8"
                                                     },
                                                     {
                                                             min: 9,
@@ -67,7 +67,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFBB00"
                                                             },
-                                                            label :"5"
+                                                            label :"9->10"
                                                     },
                                                     {
                                                             min: 11,
@@ -75,7 +75,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFAA00"
                                                             },
-                                                            label :"6"
+                                                            label :"11->12"
                                                     },
                                                     {
                                                             min: 14,
@@ -83,7 +83,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF9900"
                                                             },
-                                                            label :"7"
+                                                            label :"13->16"
                                                     },
                                                     {
                                                             min: 27,
@@ -91,7 +91,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF8800"
                                                             },
-                                                            label :"8"
+                                                            label :"28"
                                                     },
                                                     {
                                                             min: 32,
@@ -99,7 +99,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF7700"
                                                             },
-                                                            label :"9"
+                                                            label :"33"
                                                     },
                                                     {
                                                             min: 39,
@@ -107,7 +107,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF6600"
                                                             },
-                                                            label :"10"
+                                                            label :"40"
                                                     },
                                                     {
                                                             min: 63,
@@ -115,7 +115,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF5500"
                                                             },
-                                                            label :"11"
+                                                            label :"64"
                                                     },
 
                                                     {
@@ -124,14 +124,14 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF3300"
                                                             },
-                                                            label :"13"
+                                                            label :"76"
                                                     },
                                                     {
                                                             min :242, 
                                                             attrs : {
                                                                     fill : "#FF0000"
                                                             },
-                                                            label :"15"
+                                                            label :"More than 242"
                                                     }
                                                     
                                                 /*
