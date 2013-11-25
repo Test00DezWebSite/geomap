@@ -38,15 +38,15 @@ $(function(){
                                                     },
                                                     {
                                                             min: 1,
-                                                            max :2, 
+                                                            max :3, 
                                                             attrs : {
                                                                     fill : "#FFEE00"
                                                             },
                                                             label :"1"
                                                     },
                                                     {
-                                                            min: 2,
-                                                            max :3, 
+                                                            min: 4,
+                                                            max :6, 
                                                             attrs : {
                                                                     fill : "#FFDD00"
                                                             },
@@ -54,95 +54,80 @@ $(function(){
                                                     },
                                                     
                                                     {
-                                                            min: 3,
-                                                            max :4, 
+                                                            min: 7,
+                                                            max :8, 
                                                             attrs : {
                                                                     fill : "#FFCC00"
                                                             },
                                                             label :"3"
                                                     },
                                                     {
-                                                            min: 5,
-                                                            max :6, 
+                                                            min: 9,
+                                                            max :10, 
                                                             attrs : {
                                                                     fill : "#FFBB00"
                                                             },
                                                             label :"5"
                                                     },
                                                     {
-                                                            min: 6,
-                                                            max :7, 
+                                                            min: 11,
+                                                            max :13, 
                                                             attrs : {
                                                                     fill : "#FFAA00"
                                                             },
                                                             label :"6"
                                                     },
                                                     {
-                                                            min: 7,
-                                                            max :8, 
+                                                            min: 14,
+                                                            max :15, 
                                                             attrs : {
                                                                     fill : "#FF9900"
                                                             },
                                                             label :"7"
                                                     },
                                                     {
-                                                            min: 8,
-                                                            max :9, 
+                                                            min: 27,
+                                                            max :29, 
                                                             attrs : {
                                                                     fill : "#FF8800"
                                                             },
                                                             label :"8"
                                                     },
                                                     {
-                                                            min: 9,
-                                                            max :10, 
+                                                            min: 32,
+                                                            max :34, 
                                                             attrs : {
                                                                     fill : "#FF7700"
                                                             },
                                                             label :"9"
                                                     },
                                                     {
-                                                            min: 10,
-                                                            max :11, 
+                                                            min: 39,
+                                                            max :41, 
                                                             attrs : {
                                                                     fill : "#FF6600"
                                                             },
                                                             label :"10"
                                                     },
                                                     {
-                                                            min: 11,
-                                                            max :12, 
+                                                            min: 63,
+                                                            max :65, 
                                                             attrs : {
                                                                     fill : "#FF5500"
                                                             },
                                                             label :"11"
                                                     },
+
                                                     {
-                                                            min: 12,
-                                                            max :13, 
-                                                            attrs : {
-                                                                    fill : "#FF4400"
-                                                            },
-                                                            label :"12"
-                                                    },
-                                                    {
-                                                            min: 13,
-                                                            max :14, 
+                                                            min: 75,
+                                                            max :77, 
                                                             attrs : {
                                                                     fill : "#FF3300"
                                                             },
                                                             label :"13"
                                                     },
                                                     {
-                                                            min: 14,
-                                                            max :15, 
-                                                            attrs : {
-                                                                    fill : "#FF1100"
-                                                            },
-                                                            label :"14"
-                                                    },
-                                                    {
-                                                            min :15, 
+                                                            min :242, 
                                                             attrs : {
                                                                     fill : "#FF0000"
                                                             },
