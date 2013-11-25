@@ -24,29 +24,31 @@ $(function(){
                             },
                             legend : {
                                     area : {
-                                            display : true,
+                                            display : false,
                                             title :"Population by country", 
                                             slices : [
                                                     {
                                                             max :1, 
                                                             attrs : {
                                                                     fill : "#FFFF00"
-                                                            }/*,
-                                                            label :"Less than de "+min+" humans"*/
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 1,
                                                             max :2, 
                                                             attrs : {
                                                                     fill : "#FFEE00"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 2,
                                                             max :3, 
                                                             attrs : {
                                                                     fill : "#FFDD00"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     
                                                     {
@@ -54,83 +56,95 @@ $(function(){
                                                             max :4, 
                                                             attrs : {
                                                                     fill : "#FFCC00"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 5,
                                                             max :6, 
                                                             attrs : {
                                                                     fill : "#FFBB00"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 6,
                                                             max :7, 
                                                             attrs : {
                                                                     fill : "#FFAA00"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 7,
                                                             max :8, 
                                                             attrs : {
                                                                     fill : "#FF9900"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 8,
                                                             max :9, 
                                                             attrs : {
                                                                     fill : "#FF8800"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 9,
                                                             max :10, 
                                                             attrs : {
                                                                     fill : "#FF7700"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 10,
                                                             max :11, 
                                                             attrs : {
                                                                     fill : "#FF6600"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 11,
                                                             max :12, 
                                                             attrs : {
                                                                     fill : "#FF5500"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 12,
                                                             max :13, 
                                                             attrs : {
                                                                     fill : "#FF4400"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 13,
                                                             max :14, 
                                                             attrs : {
                                                                     fill : "#FF3300"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min: 14,
                                                             max :15, 
                                                             attrs : {
                                                                     fill : "#FF1100"
-                                                            }
+                                                            },
+                                                            label :"Less than de "+min+" humans"
                                                     },
                                                     {
                                                             min :15, 
                                                             attrs : {
                                                                     fill : "#FF0000"
-                                                            }
+                                                            },
+                                                            label :"More than "+max+" humans"
                                                     }
                                                     
                                                 /*
