@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 include('parameters_details.php');
-include('cortext_countries.php');
+include('countries_iso3166.php');
 
 
 $sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";
