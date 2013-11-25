@@ -24,7 +24,7 @@ $(function(){
                             },
                             legend : {
                                     area : {
-                                            display : false,
+                                            display : true,
                                             title :"Population by country", 
                                             slices : [
                                                     {
@@ -32,7 +32,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFFF00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"less than 1"
                                                     },
                                                     {
                                                             min: 1,
@@ -40,7 +40,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFEE00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"1"
                                                     },
                                                     {
                                                             min: 2,
@@ -48,7 +48,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFDD00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"2"
                                                     },
                                                     
                                                     {
@@ -57,7 +57,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFCC00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"3"
                                                     },
                                                     {
                                                             min: 5,
@@ -65,7 +65,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFBB00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"5"
                                                     },
                                                     {
                                                             min: 6,
@@ -73,7 +73,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FFAA00"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"6"
                                                     },
                                                     {
                                                             min: 7,
@@ -81,7 +81,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF9900"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"7"
                                                     },
                                                     {
                                                             min: 8,
@@ -89,7 +89,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF8800"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"8"
                                                     },
                                                     {
                                                             min: 9,
@@ -97,7 +97,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF7700"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"9"
                                                     },
                                                     {
                                                             min: 10,
@@ -105,7 +105,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF6600"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"10"
                                                     },
                                                     {
                                                             min: 11,
@@ -113,7 +113,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF5500"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"11"
                                                     },
                                                     {
                                                             min: 12,
@@ -121,7 +121,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF4400"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"12"
                                                     },
                                                     {
                                                             min: 13,
@@ -129,7 +129,7 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF3300"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"13"
                                                     },
                                                     {
                                                             min: 14,
@@ -137,14 +137,14 @@ $(function(){
                                                             attrs : {
                                                                     fill : "#FF1100"
                                                             },
-                                                            label :"Less than de "+min+" humans"
+                                                            label :"14"
                                                     },
                                                     {
                                                             min :15, 
                                                             attrs : {
                                                                     fill : "#FF0000"
                                                             },
-                                                            label :"More than "+max+" humans"
+                                                            label :"15"
                                                     }
                                                     
                                                 /*
