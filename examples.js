@@ -11,7 +11,9 @@ $(function(){
             contentType: "application/json",
             //dataType: 'jsonp',
             success : function(data){ 
-                console.log(data);
+                    for(var i in data){
+                        console.log(data[i].value);
+                    }
                     $(".maparea6").mapael({
                             map : {
                                     name : "world_countries",
