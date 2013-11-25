@@ -38,7 +38,7 @@ $(function(){
                                                     },
                                                     {
                                                             min: 1,
-                                                            max :3, 
+                                                            max :4, 
                                                             attrs : {
                                                                     fill : "#FFEE00"
                                                             },
@@ -46,7 +46,7 @@ $(function(){
                                                     },
                                                     {
                                                             min: 4,
-                                                            max :6, 
+                                                            max :7, 
                                                             attrs : {
                                                                     fill : "#FFDD00"
                                                             },
@@ -55,7 +55,7 @@ $(function(){
                                                     
                                                     {
                                                             min: 7,
-                                                            max :8, 
+                                                            max :9, 
                                                             attrs : {
                                                                     fill : "#FFCC00"
                                                             },
@@ -63,7 +63,7 @@ $(function(){
                                                     },
                                                     {
                                                             min: 9,
-                                                            max :10, 
+                                                            max :11, 
                                                             attrs : {
                                                                     fill : "#FFBB00"
                                                             },
@@ -79,7 +79,7 @@ $(function(){
                                                     },
                                                     {
                                                             min: 14,
-                                                            max :15, 
+                                                            max :16, 
                                                             attrs : {
                                                                     fill : "#FF9900"
                                                             },
