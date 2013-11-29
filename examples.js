@@ -12,7 +12,7 @@ $(function(){
             //dataType: 'jsonp',
             success : function(data){ 
                     for(var i in data){
-                        console.log(data[i].value);
+                        console.log("["+i+"]:["+data[i].value+"]");
                     }
                     $(".maparea6").mapael({
                             map : {

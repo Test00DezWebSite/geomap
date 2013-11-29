@@ -15,12 +15,13 @@ foreach ($base->query($sql) as $row) {
     $code=$country[$row["data"]];
     //$norm_country[$code] = array();//$row["count(*)"];
     $tempcount=0;
-    if($norm_country[$code]){
+    if($norm_country[$code]){        
         $norm_country[$code]["value"]+=$row["count(*)"];
         $norm_country[$code]["tooltip"]["content"]="<span style='font-weight=bold;'>".$CC[$code]."</span><br/>Publications: ".$norm_country[$code]["value"];
     }
     else {        
         $info=array();
+        //$info["code"] = $code;
         $info["value"]=$row["count(*)"];
         $info["attrs"] = array();
         $info["attrs"]["href"] = "#";
@@ -32,7 +33,11 @@ foreach ($base->query($sql) as $row) {
         $norm_country[$code]=$info;
     }
 }
-
+/*
+foreach($norm_country as $c){
+    echo "[".$c["code"]."]:".$c["value"];
+    echo "<br>";
+}*/
 echo json_encode($norm_country);
 
 ?>
