@@ -6,13 +6,23 @@ include('parameters_details.php');
 include('countries_iso3166.php');
 include('countries_dict.php');
 
-
-//$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ad
-$sql = "select count(*),data from ISIkeyword GROUP BY data ORDER BY count(*) DESC";
+$sql="";
+$echoing=false;
+$column="";
+if (strpos($dbname, 'Echoing') !== false){
+    $echoing=true;
+    $column="Office Country";
+    $sql='select count(*),"Office Country" from rock GROUP BY "Office Country" ORDER BY count(*) DESC';
+} else {
+    $column="data";
+    $sql = "select count(*),data from ISIkeyword GROUP BY data ORDER BY count(*) DESC";
+}
+//$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ademe
 
 $norm_country = array();
 foreach ($base->query($sql) as $row) {
-    $code = $country[$row["data"]];
+    if($echoing) $code = $row[$column];
+    else $code = $country[$row[$column]];
     //$norm_country[$code] = array();//$row["count(*)"];
     $tempcount = 0;
     if ($norm_country[$code]) {
