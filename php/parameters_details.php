@@ -1,7 +1,8 @@
 <?php
 // Common parameters for all function proposing insight into the corpora
-$mainpath=dirname(dirname(getcwd()))."/data/"; // -> /var/www/ademe/data/
-$dbname=getDB($mainpath);//'homework-20750-1-homework-db.db';
+$mainpath=dirname(dirname(getcwd()))."/"; // -> /var/www/ademe/data/
+$db=json_decode($_GET["source"]);
+$dbname=$db[0];//getDB($mainpath);//'homework-20750-1-homework-db.db';
 $base = new PDO("sqlite:" .$mainpath.$dbname);
 $max_item_displayed=6;
 
