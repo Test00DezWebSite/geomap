@@ -40,9 +40,7 @@ $(function(){
             contentType: "application/json",
             //dataType: 'jsonp',
             success : function(data){ 
-                    for(var i in data){
-                        console.log("["+i+"]:["+data[i].value+"]");
-                    }
+                    console.log(data);
                     $(".maparea6").mapael({
                             map : {
                                     name : "world_countries",
@@ -57,145 +55,7 @@ $(function(){
                                     area : {
                                             display : true,
                                             title :"Population by country", 
-                                            slices : [
-                                                    {
-                                                            max :1, 
-                                                            attrs : {
-                                                                    fill : "#FFFF00"
-                                                            },
-                                                            label :"less than 1"
-                                                    },
-                                                    {
-                                                            min: 1,
-                                                            max :4, 
-                                                            attrs : {
-                                                                    fill : "#FFEE00"
-                                                            },
-                                                            label :"1->3"
-                                                    },
-                                                    {
-                                                            min: 4,
-                                                            max :7, 
-                                                            attrs : {
-                                                                    fill : "#FFDD00"
-                                                            },
-                                                            label :"5->6"
-                                                    },
-                                                    
-                                                    {
-                                                            min: 7,
-                                                            max :9, 
-                                                            attrs : {
-                                                                    fill : "#FFCC00"
-                                                            },
-                                                            label :"7->8"
-                                                    },
-                                                    {
-                                                            min: 9,
-                                                            max :11, 
-                                                            attrs : {
-                                                                    fill : "#FFBB00"
-                                                            },
-                                                            label :"9->10"
-                                                    },
-                                                    {
-                                                            min: 11,
-                                                            max :13, 
-                                                            attrs : {
-                                                                    fill : "#FFAA00"
-                                                            },
-                                                            label :"11->12"
-                                                    },
-                                                    {
-                                                            min: 14,
-                                                            max :16, 
-                                                            attrs : {
-                                                                    fill : "#FF9900"
-                                                            },
-                                                            label :"13->16"
-                                                    },
-                                                    {
-                                                            min: 27,
-                                                            max :29, 
-                                                            attrs : {
-                                                                    fill : "#FF8800"
-                                                            },
-                                                            label :"28"
-                                                    },
-                                                    {
-                                                            min: 32,
-                                                            max :34, 
-                                                            attrs : {
-                                                                    fill : "#FF7700"
-                                                            },
-                                                            label :"33"
-                                                    },
-                                                    {
-                                                            min: 39,
-                                                            max :41, 
-                                                            attrs : {
-                                                                    fill : "#FF6600"
-                                                            },
-                                                            label :"40"
-                                                    },
-                                                    {
-                                                            min: 63,
-                                                            max :65, 
-                                                            attrs : {
-                                                                    fill : "#FF5500"
-                                                            },
-                                                            label :"64"
-                                                    },
-
-                                                    {
-                                                            min: 75,
-                                                            max :77, 
-                                                            attrs : {
-                                                                    fill : "#FF3300"
-                                                            },
-                                                            label :"76"
-                                                    },
-                                                    {
-                                                            min :242, 
-                                                            attrs : {
-                                                                    fill : "#FF0000"
-                                                            },
-                                                            label :"More than 242"
-                                                    }
-                                                    
-                                                /*
-                                                    {
-                                                            max :min, 
-                                                            attrs : {
-                                                                    fill : "#6aafe1"
-                                                            },
-                                                            label :"Less than de "+min+" humans"
-                                                    },
-                                                    {
-                                                            min :min, 
-                                                            max :med, 
-                                                            attrs : {
-                                                                    fill : "#459bd9"
-                                                            },
-                                                            label :"Between "+min+" and "+med+" humans"
-                                                    },
-                                                    {
-                                                            min :med, 
-                                                            max :max, 
-                                                            attrs : {
-                                                                    fill : "#2579b5"
-                                                            },
-                                                            label :"Between "+med+" and "+max+" humans"
-                                                    },
-                                                    {
-                                                            min :max, 
-                                                            attrs : {
-                                                                    fill : "#1a527b"
-                                                            },
-                                                            label :"More than "+max+" humans"
-                                                    }
-                                                    */
-                                            ]
+                                            slices : data["slices"]
                                     }/*,
                                     plot :{
                                             display : true,
@@ -273,7 +133,7 @@ $(function(){
                                             tooltip: {content : "Tokyo<br />Population: 200001"}
                                     }
                             },*/
-                            areas: data
+                            areas: data["areas"]
                     });
             },
             error: function(){ 
