@@ -9,37 +9,90 @@ include('countries_dict.php');
 $sql="";
 $echoing=false;
 $column="";
-if (strpos($dbname, 'Echoing') !== false){
-    $echoing=true;
-    $column="Office Country";
-    $sql='select count(*),"Office Country" from rock GROUP BY "Office Country" ORDER BY count(*) DESC';
-} else {
-    $column="data";
-    $sql = "select count(*),data from ISIkeyword GROUP BY data ORDER BY count(*) DESC";
+//if (strpos($dbname, 'Echoing') !== false){
+//    $echoing=true;
+//    $column="Office Country";
+//    $sql='select count(*),"Office Country" from rock GROUP BY "Office Country" ORDER BY count(*) DESC';
+//} else {
+
+
+$query = str_replace( '__and__', '&', $_GET["query"] );
+$elems = json_decode($query);
+
+$selectiveQuery=true;
+if(count($elems)==1){
+    foreach ($elems as $e){
+        if($e=="all") {
+            $selectiveQuery=false;
+            break;
+        }
+    }
 }
-//$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ademe
 
 $norm_country = array();
-foreach ($base->query($sql) as $row) {
-    if($echoing) $code = $row[$column];
-    else $code = $country[$row[$column]];
-    //$norm_country[$code] = array();//$row["count(*)"];
-    $tempcount = 0;
-    if ($norm_country[$code]) {
-        $norm_country[$code]["value"]+=$row["count(*)"];
-        $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $norm_country[$code]["value"];
-    } else {
-        $info = array();
-        $info["code"] = $code;
-        $info["value"] = $row["count(*)"];
-        $info["attrs"] = array();
-        $info["attrs"]["href"] = "#";
-        $info["tooltip"] = array();
 
-        //$info["tooltip"]["content"] = "%3Cspan%20style%3D%22font-weight%3Abold%3B%22%3E".$code."%3C%2Fspan%3E%3Cbr%2F%3Enb_Publishers%20%3A".$row["count(*)"];
-        //$info["tooltip"]["content"] = "&lt;span&gt;".$code."&lt;&#47;span&gt;&lt;br;&lt;&gt;".$row["count(*)"];
-        $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $row["count(*)"];
-        $norm_country[$code] = $info;
+if($selectiveQuery){
+    $countries_temp=array();
+    foreach($elems as $e){
+        $sql="SELECT ISIkeyword.data FROM ISIterms,ISIkeyword where ISIterms.data='".$e."' ".
+                     "and ISIterms.id=ISIkeyword.id GROUP BY ISIkeyword.data";
+        foreach ($base->query($sql) as $row) {
+            if($countries_temp[$row["data"]]) $countries_temp[$row["data"]]+=1;
+            else $countries_temp[$row["data"]]=1;
+        }
+    }
+    arsort($countries_temp);
+    
+    foreach ($countries_temp as $key => $value) {
+        //if($echoing) $code = $row[$column];
+        $code = $country[$key];
+        //$norm_country[$code] = array();//$row["count(*)"];
+        $tempcount = 0;
+        if ($norm_country[$code]) {
+            $norm_country[$code]["value"]+=$value;
+            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $norm_country[$code]["value"];
+        } else {
+            $info = array();
+            $info["code"] = $code;
+            $info["value"] = $value;
+            $info["attrs"] = array();
+            $info["attrs"]["href"] = "#";
+            $info["tooltip"] = array();
+
+            //$info["tooltip"]["content"] = "%3Cspan%20style%3D%22font-weight%3Abold%3B%22%3E".$code."%3C%2Fspan%3E%3Cbr%2F%3Enb_Publishers%20%3A".$row["count(*)"];
+            //$info["tooltip"]["content"] = "&lt;span&gt;".$code."&lt;&#47;span&gt;&lt;br;&lt;&gt;".$row["count(*)"];
+            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $value;
+            $norm_country[$code] = $info;
+        }
+    }
+}
+else {
+    $column="data";
+    $sql = "select count(*),data from ISIkeyword GROUP BY data ORDER BY count(*) DESC";
+//}
+//$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ademe
+
+    foreach ($base->query($sql) as $row) {
+        //if($echoing) $code = $row[$column];
+        $code = $country[$row[$column]];
+        //$norm_country[$code] = array();//$row["count(*)"];
+        $tempcount = 0;
+        if ($norm_country[$code]) {
+            $norm_country[$code]["value"]+=$row["count(*)"];
+            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $norm_country[$code]["value"];
+        } else {
+            $info = array();
+            $info["code"] = $code;
+            $info["value"] = $row["count(*)"];
+            $info["attrs"] = array();
+            $info["attrs"]["href"] = "#";
+            $info["tooltip"] = array();
+
+            //$info["tooltip"]["content"] = "%3Cspan%20style%3D%22font-weight%3Abold%3B%22%3E".$code."%3C%2Fspan%3E%3Cbr%2F%3Enb_Publishers%20%3A".$row["count(*)"];
+            //$info["tooltip"]["content"] = "&lt;span&gt;".$code."&lt;&#47;span&gt;&lt;br;&lt;&gt;".$row["count(*)"];
+            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $row["count(*)"];
+            $norm_country[$code] = $info;
+        }
     }
 }
 

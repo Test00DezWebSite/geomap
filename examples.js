@@ -28,7 +28,7 @@ getUrlParam = (function () {
 
 $(function(){
         //geomap/?db=["data/NCI/data.db"]&query=all 
-        console.log("php/mapael.php"+"?source="+getUrlParam.db);
+        console.log("php/mapael.php"+"?source="+getUrlParam.db+"&query="+getUrlParam.query);
         min=20;
         max=519;
         med=max/2;
@@ -36,7 +36,7 @@ $(function(){
             type: 'GET',
             //url: 'areas.json',
             url: "php/mapael.php",
-            data:"source="+getUrlParam.db,
+            data:"source="+getUrlParam.db+"&query="+getUrlParam.query,
             contentType: "application/json",
             //dataType: 'jsonp',
             success : function(data){ 
