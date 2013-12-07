@@ -47,7 +47,7 @@ $(function(){
                     },
                     defaultArea: {
                         attrs : {
-                            stroke : "#FAFAFA", 
+                            stroke : "#003300", 
                             "stroke-width" : 1
                         }
                     }
