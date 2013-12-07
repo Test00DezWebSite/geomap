@@ -33,7 +33,7 @@ $(function(){
             type: 'GET',
             //url: 'areas.json',
             url: "php/mapael.php",
-            data:"source="+getUrlParam.db+"&query="+getUrlParam.query,
+            data:"db="+getUrlParam.db+"&query="+getUrlParam.query,
             contentType: "application/json",
             //dataType: 'jsonp',
             success : function(data){ 
