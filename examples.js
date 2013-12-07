@@ -28,10 +28,7 @@ getUrlParam = (function () {
 
 $(function(){
         //geomap/?db=["data/NCI/data.db"]&query=all 
-        console.log("php/mapael.php"+"?source="+getUrlParam.db+"&query="+getUrlParam.query);
-        min=20;
-        max=519;
-        med=max/2;
+        console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
         $.ajax({
             type: 'GET',
             //url: 'areas.json',
@@ -140,8 +137,4 @@ $(function(){
                 console.log("Page Not found.");
             }
         });
-	
-	// Example #6
-	
-	
 });

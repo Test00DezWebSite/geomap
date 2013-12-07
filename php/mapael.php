@@ -7,15 +7,7 @@ include('countries_iso3166.php');
 include('countries_dict.php');
 
 $sql="";
-$echoing=false;
 $column="";
-//if (strpos($dbname, 'Echoing') !== false){
-//    $echoing=true;
-//    $column="Office Country";
-//    $sql='select count(*),"Office Country" from rock GROUP BY "Office Country" ORDER BY count(*) DESC';
-//} else {
-
-
 $query = str_replace( '__and__', '&', $_GET["query"] );
 $elems = json_decode($query);
 
@@ -44,9 +36,7 @@ if($selectiveQuery){
     arsort($countries_temp);
     
     foreach ($countries_temp as $key => $value) {
-        //if($echoing) $code = $row[$column];
         $code = $country[$key];
-        //$norm_country[$code] = array();//$row["count(*)"];
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$value;
@@ -58,9 +48,6 @@ if($selectiveQuery){
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-
-            //$info["tooltip"]["content"] = "%3Cspan%20style%3D%22font-weight%3Abold%3B%22%3E".$code."%3C%2Fspan%3E%3Cbr%2F%3Enb_Publishers%20%3A".$row["count(*)"];
-            //$info["tooltip"]["content"] = "&lt;span&gt;".$code."&lt;&#47;span&gt;&lt;br;&lt;&gt;".$row["count(*)"];
             $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $value;
             $norm_country[$code] = $info;
         }
@@ -73,9 +60,7 @@ else {
 //$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ademe
 
     foreach ($base->query($sql) as $row) {
-        //if($echoing) $code = $row[$column];
         $code = $country[$row[$column]];
-        //$norm_country[$code] = array();//$row["count(*)"];
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$row["count(*)"];
@@ -87,9 +72,6 @@ else {
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-
-            //$info["tooltip"]["content"] = "%3Cspan%20style%3D%22font-weight%3Abold%3B%22%3E".$code."%3C%2Fspan%3E%3Cbr%2F%3Enb_Publishers%20%3A".$row["count(*)"];
-            //$info["tooltip"]["content"] = "&lt;span&gt;".$code."&lt;&#47;span&gt;&lt;br;&lt;&gt;".$row["count(*)"];
             $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $row["count(*)"];
             $norm_country[$code] = $info;
         }
@@ -98,8 +80,6 @@ else {
 
 $occToCC = array();
 foreach ($norm_country as $c) {
-    //echo "[".$c["code"]."]:".$c["value"];
-    //echo "<br>";
     if (!$occToCC[$c["value"]]) {
         $occToCC[$c["value"]] = array();
     }
@@ -109,7 +89,6 @@ foreach ($norm_country as $c) {
 krsort($occToCC);
 $countries_occ_DESC = array();
 foreach ($occToCC as $key => $value) {
-    //pr($key.":".json_encode($value));
     $info = array();
     $info["occ"] = $key;
     $info["countries"] = $value;
@@ -118,22 +97,6 @@ foreach ($occToCC as $key => $value) {
 }
 
 $colors = array();
-//array_push($colors, "FF0000");
-//array_push($colors, "FF1100");
-//array_push($colors, "FF2200");
-//array_push($colors, "FF3300");
-//array_push($colors, "FF4400");
-//array_push($colors, "FF5500");
-//array_push($colors, "FF6600");
-//array_push($colors, "FF7700");
-//array_push($colors, "FF8800");
-//array_push($colors, "FF9900");
-//array_push($colors, "FFAA00");
-//array_push($colors, "FFBB00");
-//array_push($colors, "FFCC00");
-//array_push($colors, "FFDD00");
-//array_push($colors, "FFEE00");
-//array_push($colors, "FFFF00");
 
 $colors = array();
 include("ColourGradient.php");
