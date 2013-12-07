@@ -118,29 +118,34 @@ foreach ($occToCC as $key => $value) {
 }
 
 $colors = array();
-array_push($colors, "FF0000");
-array_push($colors, "FF1100");
-array_push($colors, "FF2200");
-array_push($colors, "FF3300");
-array_push($colors, "FF4400");
-array_push($colors, "FF5500");
-array_push($colors, "FF6600");
-array_push($colors, "FF7700");
-array_push($colors, "FF8800");
-array_push($colors, "FF9900");
-array_push($colors, "FFAA00");
-array_push($colors, "FFBB00");
-array_push($colors, "FFCC00");
-array_push($colors, "FFDD00");
-array_push($colors, "FFEE00");
-array_push($colors, "FFFF00");
+//array_push($colors, "FF0000");
+//array_push($colors, "FF1100");
+//array_push($colors, "FF2200");
+//array_push($colors, "FF3300");
+//array_push($colors, "FF4400");
+//array_push($colors, "FF5500");
+//array_push($colors, "FF6600");
+//array_push($colors, "FF7700");
+//array_push($colors, "FF8800");
+//array_push($colors, "FF9900");
+//array_push($colors, "FFAA00");
+//array_push($colors, "FFBB00");
+//array_push($colors, "FFCC00");
+//array_push($colors, "FFDD00");
+//array_push($colors, "FFEE00");
+//array_push($colors, "FFFF00");
+
+$colors = array();
+include("ColourGradient.php");
+$nbSteps=count($countries_occ_DESC)-1;
+$instance = new Generator($nbSteps);
+$instance->getColours();
+$colors=$instance->thecolors;
 
 foreach ($countries_occ_DESC as $key => $value) {
     if ($key < count($colors)) {
         $countries_occ_DESC[$key]["color"] = $colors[min(count($colors), $key)];
-    }
-    else
-        $countries_occ_DESC[$key]["color"] = $colors[count($colors) - 1];
+    } else $countries_occ_DESC[$key]["color"] = $colors[count($colors) - 1];
 }
 
 $temp = $countries_occ_DESC;
@@ -149,7 +154,7 @@ $theslices = array();
 $thedata = array();
 foreach ($temp as $key => $value) {
     $info = array();
-    $info["min"] = $value["occ"]-1;
+    $info["min"] = $value["occ"];
     $info["max"] = $value["occ"]+1;
     $info["attrs"] = array();
     $info["attrs"]["fill"] = "#".$value["color"];
