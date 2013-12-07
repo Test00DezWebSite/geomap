@@ -47,8 +47,10 @@ $(function(){
                     },
                     defaultArea: {
                         attrs : {
-                            stroke : "#003300", 
-                            "stroke-width" : 1
+                            stroke : "#848484", 
+                            "stroke-width" : 1,
+                            fill: "#FFFFFF",
+                            cursor: "pointer"
                         }
                     }
                 },
