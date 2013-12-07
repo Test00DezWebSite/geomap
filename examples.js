@@ -27,33 +27,37 @@ getUrlParam = (function () {
 })();
 
 $(function(){
-        //geomap/?db=["data/NCI/data.db"]&query=all 
-        console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
-        $.ajax({
-            type: 'GET',
-            //url: 'areas.json',
-            url: "php/mapael.php",
-            data:"db="+getUrlParam.db+"&query="+getUrlParam.query,
-            contentType: "application/json",
-            //dataType: 'jsonp',
-            success : function(data){ 
-                    console.log(data);
-                    $(".maparea6").mapael({
-                            map : {
-                                    name : "world_countries",
-                                    defaultArea: {
-                                            attrs : {
-                                                    stroke : "#FAFAFA", 
-                                                    "stroke-width" : 1
-                                            }
-                                    }
-                            },
-                            legend : {
-                                    area : {
-                                            display : true,
-                                            title :"Population by country", 
-                                            slices : data["slices"]
-                                    }/*,
+    //geomap/?db=["data/NCI/data.db"]&query=all 
+    console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
+    $.ajax({
+        type: 'GET',
+        //url: 'areas.json',
+        url: "php/mapael.php",
+        data:"db="+getUrlParam.db+"&query="+getUrlParam.query,
+        contentType: "application/json",
+        //dataType: 'jsonp',
+        success : function(data){ 
+            console.log(data);
+            $(".maparea6").mapael({
+                map : {
+                    name : "world_countries",
+                    zoom: {
+				enabled: true,
+				maxLevel : 10
+                    },
+                    defaultArea: {
+                        attrs : {
+                            stroke : "#FAFAFA", 
+                            "stroke-width" : 1
+                        }
+                    }
+                },
+                legend : {
+                    area : {
+                        display : true,
+                        title :"Population by country", 
+                        slices : data["slices"]
+                    }/*,
                                     plot :{
                                             display : true,
                                             title: "Some cities ..."
@@ -97,7 +101,7 @@ $(function(){
                                                     }
                                             ]
                                     }*/
-                            },/*
+                },/*
                             plots : {
                                     'paris' : {
                                             latitude :48.86, 
@@ -130,11 +134,19 @@ $(function(){
                                             tooltip: {content : "Tokyo<br />Population: 200001"}
                                     }
                             },*/
-                            areas: data["areas"]
-                    });
-            },
-            error: function(){ 
-                console.log("Page Not found.");
-            }
-        });
+                areas: data["areas"]
+            });
+            $(".maparea6").on("mousewheel", function(e) {
+		if (e.deltaY > 0)
+			$(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") + 1);
+		else
+			$(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") - 1);
+			
+		return false;
+            });
+        },
+        error: function(){ 
+            console.log("Page Not found.");
+        }
+    });
 });
