@@ -136,7 +136,7 @@ $(function(){
                             },*/
                 areas: data["areas"]
             });
-            $(".maparea6").on("mousewheel", function(e) {
+            $(".map").on("mousewheel", function(e) {
 		if (e.deltaY > 0)
 			$(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") + 1);
 		else
