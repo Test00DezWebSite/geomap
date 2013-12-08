@@ -33,7 +33,7 @@ var onHover="#324F17";//green
 
 function initiateMap(db,query){
     //geomap/?db=["data/NCI/data.db"]&query=all 
-    console.log("php/mapael.php"+"?db="+db+"&query="+query);
+    console.log("geomap/php/mapael.php"+"?db="+db+"&query="+query);
     $.ajax({
         type: 'GET',
         //url: 'areas.json',
