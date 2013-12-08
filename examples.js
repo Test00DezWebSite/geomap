@@ -37,7 +37,7 @@ function initiateMap(db,query){
     $.ajax({
         type: 'GET',
         //url: 'areas.json',
-        url: "php/mapael.php",
+        url: "geomap/php/mapael.php",
         data:"db="+db+"&query="+query,
         contentType: "application/json",
         //dataType: 'jsonp',
