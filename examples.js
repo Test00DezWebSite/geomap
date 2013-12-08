@@ -30,8 +30,9 @@ getUrlParam = (function () {
 var borderLine="#848484";//white-gray
 var withoutData="#FFFFFF";//white
 var onHover="#324F17";//green
+initiate();
 
-$(function(){
+function initiate(){
     //geomap/?db=["data/NCI/data.db"]&query=all 
     console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
     $.ajax({
@@ -179,4 +180,4 @@ $(function(){
             console.log("Page Not found.");
         }
     });
-});
+}
