@@ -74,6 +74,25 @@
 		.zoomOut {
 			top:30px;
 		}
+                
+                .distBar {
+			width:200px;
+			height:10px;
+                        border-radius:3px;
+			border:1px solid #848484;
+                        margin: 0 auto;
+                        -moz-border-radius: 0px 0px 0px 0px;
+                        -webkit-border-radius: 0px 0px 0px 0px;
+                        background: -moz-linear-gradient(center left, #FF0000 0%,#FFFF00 100%);
+                        background: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, #FF0000),color-stop(1, #FFFF00));
+                }
+                .min,.mid,.max {
+			width:15px;
+			height:15px;
+                        border-radius:3px;
+			border:1px solid #848484;
+                }
+                .min, .mid, .max { float: left; }
 		
 </style>
 </head>
@@ -85,14 +104,19 @@
 			<div class="map">
 				<span>Alternative content for the map</span>
 			</div>
+                        
 			<div class="areaLegend">
-				<span>Alternative content for the legend</span>
 			</div>
+                        <!--
 			<div class="plotLegend">
 				<span>Alternative content for the legend</span>
 			</div>
+                        -->
 		</div>
-
+                <div class="distBar"></div>
+                <div class="min"></div>
+                <div class="mid"></div>
+                <div class="max"></div>
 	</div>
 	
 	<script src="../libs/jquery/jquery-1.9.1.js" charset="utf-8" ></script>

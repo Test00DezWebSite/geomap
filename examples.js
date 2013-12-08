@@ -26,6 +26,11 @@ getUrlParam = (function () {
     return get;
 })();
 
+//Countries and Colors:
+var borderLine="#848484";//white-gray
+var withoutData="#FFFFFF";//white
+var onHover="#324F17";//green
+
 $(function(){
     //geomap/?db=["data/NCI/data.db"]&query=all 
     console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
@@ -42,21 +47,44 @@ $(function(){
                 map : {
                     name : "world_countries",
                     zoom: {
-				enabled: true,
-				maxLevel : 10
+                        enabled: true,
+                        maxLevel : 10
                     },
                     defaultArea: {
                         attrs : {
-                            stroke : "#848484", 
+                            stroke : borderLine, //Country border line
                             "stroke-width" : 1,
-                            fill: "#FFFFFF",
+                            fill: withoutData, //Color of Countries value = 0
                             cursor: "pointer"
+                        },
+                        attrsHover : {
+                            fill: onHover, //Country on Hover
+                            animDuration : 300
                         }
+                    },			
+                    afterInit : function($self, paper, areas, plots, options) {
+                        var mapConf = $.fn.mapael.maps[this.name]
+                        var coords = {};
+                        console.log("salut monde");
+                        //id="image0";
+                        //coords = mapConf.getCoords(options.images[id].latitude, options.images[id].longitude);
+                        //paper.image(options.images[id].src, coords.x - options.images[id].width / 2, coords.y - options.images[id].height / 2, options.images[id].width, options.images[id].height);
+                    }
+		
+                },
+                
+                'images' : {
+                    'image0' : {
+                        'src' : 'http://www.neveldo.fr/mapael/cross-icon.png',
+                        'latitude' : '6.452667',
+                        'longitude' : '7.510333',
+                        'width':170,
+                        'height':150
                     }
                 },
                 legend : {
                     area : {
-                        display : true,
+                        display : false,
                         title :"Population by country", 
                         slices : data["slices"]
                     }/*,
@@ -139,12 +167,12 @@ $(function(){
                 areas: data["areas"]
             });
             $(".map").on("mousewheel", function(e) {
-		if (e.deltaY > 0)
-			$(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") + 1);
-		else
-			$(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") - 1);
+                if (e.deltaY > 0)
+                    $(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") + 1);
+                else
+                    $(".maparea6").trigger("zoom", $(".maparea6").data("zoomLevel") - 1);
 			
-		return false;
+                return false;
             });
         },
         error: function(){ 

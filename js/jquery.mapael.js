@@ -422,13 +422,14 @@
 		var $parentContainer = $container.parent()
 			, $zoomIn = $("<div>").addClass(options.zoomInCssClass).html("+")
 			, $zoomOut = $("<div>").addClass(options.zoomOutCssClass).html("&#x2212;")
+			//, $distBar = $("<div>").addClass("distBar").html(".")
 			, mousedown  = false
 			, previousX = 0
 			, previousY = 0;
 		
 		// Zoom
 		$parentContainer.data("zoomLevel", 0);
-		$container.append($zoomIn).append($zoomOut);
+		$container.append($zoomIn).append($zoomOut);//.append($distBar);
 		
 		$parentContainer.on("zoom", function(e, level, x, y) {
 			var currentLevel = Math.min(Math.max(level, 0), options.maxLevel);

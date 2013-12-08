@@ -138,6 +138,14 @@ foreach ($temp as $key => $value) {
     }
 }
 
+$info = array();
+$info["min"] = 0;
+$info["max"] = 1;
+$info["attrs"] = array();
+$info["attrs"]["fill"] = "#FFFFFF";
+$info["label"] = "[WHITE]  Papers: 0";
+array_push($theslices, $info);
+
 $finalarray=array();
 $finalarray["areas"]=$thedata;
 $finalarray["slices"]=$theslices;
