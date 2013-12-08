@@ -30,16 +30,15 @@ getUrlParam = (function () {
 var borderLine="#848484";//white-gray
 var withoutData="#FFFFFF";//white
 var onHover="#324F17";//green
-initiate();
 
-function initiate(){
+function initiateMap(db,query){
     //geomap/?db=["data/NCI/data.db"]&query=all 
-    console.log("php/mapael.php"+"?db="+getUrlParam.db+"&query="+getUrlParam.query);
+    console.log("php/mapael.php"+"?db="+db+"&query="+query);
     $.ajax({
         type: 'GET',
         //url: 'areas.json',
         url: "php/mapael.php",
-        data:"db="+getUrlParam.db+"&query="+getUrlParam.query,
+        data:"db="+db+"&query="+query,
         contentType: "application/json",
         //dataType: 'jsonp',
         success : function(data){ 
