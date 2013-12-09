@@ -55,7 +55,7 @@ function initiateMap(db,query,submodName){
         db=getUrlParam.db;
         query=getUrlParam.query;
     }//geomap/?db=["data/nci/graph.db"]&query=["all"] 
-    imageLoading='<br><br><br><br><br><br><img style="display:block; margin: 0px auto;" src="preview.gif"></img>';
+    imageLoading='<br><br><br><br><br><br><img style="display:block; margin: 0px auto;" src="'+submodName+'preview.gif"></img>';
     $(".geomapCont").html(imageLoading);
     console.log(submodName+"php/mapael.php"+"?db="+db+"&query="+query);
     $.ajax({
