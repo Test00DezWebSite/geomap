@@ -34,13 +34,29 @@ var onHover="#324F17";//green
 if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
     initiateMap(getUrlParam.db,getUrlParam.query,"");
 }
-
+function getGeomapDiv(){
+    txt="";
+    txt+='<div class="maparea6">';
+    txt+='	<div class="map">';
+    txt+='<span>Alternative content for the map</span>';
+    txt+='	</div>';
+    txt+='	<div class="areaLegend">';
+    txt+='	</div>';
+    txt+='</div>';
+    txt+='<div class="distBar"></div>';
+    txt+='<div class="min"></div>';
+    txt+='<div class="mid"></div>';
+    txt+='<div class="max"></div>';
+    return txt;
+                
+}
 function initiateMap(db,query,submodName){
     if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
         db=getUrlParam.db;
         query=getUrlParam.query;
-    }
-    //geomap/?db=["data/NCI/data.db"]&query=all 
+    }//geomap/?db=["data/nci/graph.db"]&query=["all"] 
+    imageLoading='<br><br><br><br><br><br><img style="display:block; margin: 0px auto;" src="preview.gif"></img>';
+    $(".geomapCont").html(imageLoading);
     console.log(submodName+"php/mapael.php"+"?db="+db+"&query="+query);
     $.ajax({
         type: 'GET',
@@ -51,6 +67,8 @@ function initiateMap(db,query,submodName){
         //dataType: 'jsonp',
         success : function(data){ 
             console.log(data);
+            $(".geomapCont").html(getGeomapDiv());
+            
             $(".maparea6").mapael({
                 map : {
                     name : "world_countries",
