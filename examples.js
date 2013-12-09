@@ -31,13 +31,21 @@ var borderLine="#848484";//white-gray
 var withoutData="#FFFFFF";//white
 var onHover="#324F17";//green
 
-function initiateMap(db,query){
+if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
+    initiateMap(getUrlParam.db,getUrlParam.query,"");
+}
+
+function initiateMap(db,query,submodName){
+    if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
+        db=getUrlParam.db;
+        query=getUrlParam.query;
+    }
     //geomap/?db=["data/NCI/data.db"]&query=all 
-    console.log("geomap/php/mapael.php"+"?db="+db+"&query="+query);
+    console.log(submodName+"php/mapael.php"+"?db="+db+"&query="+query);
     $.ajax({
         type: 'GET',
         //url: 'areas.json',
-        url: "geomap/php/mapael.php",
+        url: submodName+"php/mapael.php",
         data:"db="+db+"&query="+query,
         contentType: "application/json",
         //dataType: 'jsonp',
