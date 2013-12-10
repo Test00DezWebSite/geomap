@@ -99,9 +99,9 @@ foreach ($occToCC as $key => $value) {
 $colors = array();
 
 $colors = array();
-include("ColourGradient.php");
+include_once("ColourGradient.php");
 $nbSteps=count($countries_occ_DESC)-1;
-$instance = new Generator($nbSteps);
+$instance = new ColorGenerator($nbSteps);
 $instance->getColours();
 $colors=$instance->thecolors;
 

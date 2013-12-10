@@ -3,7 +3,7 @@
 //localhost/ColorGradient/ColorGradient.php?steps=5
 
 
-class Generator {
+class ColorGenerator {
 
     public $steps;
     public $thecolors = array();
