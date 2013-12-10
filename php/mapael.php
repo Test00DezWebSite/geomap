@@ -40,7 +40,7 @@ if($selectiveQuery){
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$value;
-            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $norm_country[$code]["value"];
+            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $norm_country[$code]["value"].' documents' ;
         } else {
             $info = array();
             $info["code"] = $code;
@@ -48,7 +48,7 @@ if($selectiveQuery){
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $value;
+            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $value.' documents';
             $norm_country[$code] = $info;
         }
     }
@@ -64,7 +64,7 @@ else {
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$row["count(*)"];
-            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $norm_country[$code]["value"];
+            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $norm_country[$code]["value"].' documents';
         } else {
             $info = array();
             $info["code"] = $code;
@@ -72,7 +72,7 @@ else {
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>Publications: " . $row["count(*)"];
+            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $row["count(*)"].' documents';
             $norm_country[$code] = $info;
         }
     }
@@ -132,7 +132,7 @@ foreach ($temp as $key => $value) {
             $moreinfo["attr"] = array();
             $moreinfo["attr"]["href"] = "#";
             $moreinfo["tooltip"] = array();
-            $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>Publications: " . $value["occ"];
+            $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>" . $value["occ"]. ' documents';
             $thedata[$j] = $moreinfo;
         }
     }
