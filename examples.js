@@ -29,7 +29,7 @@ getUrlParam = (function () {
 //Countries and Colors:
 var borderLine="#848484";//white-gray
 var withoutData="#FFFFFF";//white
-var onHover="#324F17";//green
+var onHover="#73fb76";//green
 
 if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
     initiateMap(getUrlParam.db,getUrlParam.query,"");
