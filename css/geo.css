@@ -1,5 +1,30 @@
 	
-		.mapTooltip {
+		.geomapCont {
+			margin:auto;
+			width:80%;
+			text-align:center;
+			white-space: nowrap;
+		}
+		
+                .distBar {
+			width:200px;
+			height:10px;
+                        border-radius:3px;
+			border:1px solid #848484;
+			display: inline-block;
+                        -moz-border-radius: 0px 0px 0px 0px;
+                        -webkit-border-radius: 0px 0px 0px 0px;
+                        background: -moz-linear-gradient(center left, #FFFF00 0%,#FF0000 100%);
+                        background: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, #FFFF00),color-stop(1, #FF0000));
+                }
+                .min,.max {
+			width:15px;
+			height:15px;
+			display: inline-block;
+                }
+
+                
+                		.mapTooltip {
 			position:fixed;
 			background-color : #fff;
 			moz-opacity:0.70;
@@ -17,11 +42,6 @@
 		.mapLegend {
 		}
 		
-		
-		.geomapCont {
-			margin:auto;
-			width:80%;
-		}
 		
 		.map {
                         /* IE10 Consumer Preview */ 
@@ -70,21 +90,3 @@
 			top:30px;
 		}
                 
-                .distBar {
-			width:200px;
-			height:10px;
-                        border-radius:3px;
-			border:1px solid #848484;
-                        margin: 0 auto;
-                        -moz-border-radius: 0px 0px 0px 0px;
-                        -webkit-border-radius: 0px 0px 0px 0px;
-                        background: -moz-linear-gradient(center left, #FFFF00 0%,#FF0000 100%);
-                        background: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, #FFFF00),color-stop(1, #FF0000));
-                }
-                .min,.mid,.max {
-			width:15px;
-			height:15px;
-                        border-radius:3px;
-			border:1px solid #848484;
-                }
-                .min, .mid, .max { float: left; }

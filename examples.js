@@ -34,7 +34,7 @@ var onHover="#73fb76";//green
 if(typeof(getUrlParam.db)!=="undefined" && typeof(getUrlParam.query)!=="undefined"){
     initiateMap(getUrlParam.db,getUrlParam.query,"");
 }
-function getGeomapDiv(){
+function getGeomapDiv(min,max){
     txt="";
     txt+='<div class="maparea6">';
     txt+='	<div class="map">';
@@ -43,10 +43,10 @@ function getGeomapDiv(){
     txt+='	<div class="areaLegend">';
     txt+='	</div>';
     txt+='</div>';
-    txt+='<div class="distBar"></div>';
-    txt+='<div class="min"></div>';
-    txt+='<div class="mid"></div>';
-    txt+='<div class="max"></div>';
+    txt+='<div>Range of Publications:</div>';
+    txt+='<div class="min">'+min+'</div>&nbsp;';
+    txt+='<div class="distBar"></div>&nbsp;';
+    txt+='<div class="max">'+max+'</div>';
     return txt;
                 
 }
@@ -67,7 +67,7 @@ function initiateMap(db,query,submodName){
         //dataType: 'jsonp',
         success : function(data){ 
             console.log(data);
-            $(".geomapCont").html(getGeomapDiv());
+            $(".geomapCont").html(getGeomapDiv(data["min"],data["max"]));
             
             $(".maparea6").mapael({
                 map : {

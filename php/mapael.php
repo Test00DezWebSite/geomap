@@ -95,8 +95,8 @@ foreach ($occToCC as $key => $value) {
     $info["color"] = "";
     array_push($countries_occ_DESC, $info);
 }
-
-$colors = array();
+$min=$countries_occ_DESC[count($countries_occ_DESC)-1]["occ"];
+$max=$countries_occ_DESC[0]["occ"];
 
 $colors = array();
 include_once("ColourGradient.php");
@@ -149,8 +149,11 @@ array_push($theslices, $info);
 $finalarray=array();
 $finalarray["areas"]=$thedata;
 $finalarray["slices"]=$theslices;
+$finalarray["min"]=$min;
+$finalarray["max"]=$max;
 
 echo json_encode($finalarray);
+
 function pr($msg) {
     echo $msg . "<br>";
 }
