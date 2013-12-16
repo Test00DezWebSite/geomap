@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 
 include('parameters_details.php');
 include('countries_iso3166.php');
-include('countries_dict.php');
 
 $sql="";
 $column="";
@@ -36,7 +35,7 @@ if($selectiveQuery){
     arsort($countries_temp);
     
     foreach ($countries_temp as $key => $value) {
-        $code = $country[$key];
+        $code = strtoupper($key);
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$value;
@@ -60,7 +59,7 @@ else {
 //$sql="select count(*),data from ISIC1Country GROUP BY data ORDER BY count(*) DESC";//ademe
 
     foreach ($base->query($sql) as $row) {
-        $code = $country[$row[$column]];
+        $code = strtoupper($row[$column]);
         $tempcount = 0;
         if ($norm_country[$code]) {
             $norm_country[$code]["value"]+=$row["count(*)"];
@@ -77,7 +76,6 @@ else {
         }
     }
 }
-
 $occToCC = array();
 foreach ($norm_country as $c) {
     if (!$occToCC[$c["value"]]) {
@@ -137,6 +135,7 @@ foreach ($temp as $key => $value) {
         }
     }
 }
+
 
 $info = array();
 $info["min"] = 0;
