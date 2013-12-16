@@ -33,7 +33,7 @@ if($selectiveQuery){
         }
     }
     arsort($countries_temp);
-    
+
     foreach ($countries_temp as $key => $value) {
         $code = strtoupper($key);
         $tempcount = 0;
