@@ -18,8 +18,8 @@
                         background: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, #FFFF00),color-stop(1, #FF0000));
                 }
                 .min,.max {
-			width:15px;
-			height:15px;
+			width:100px;
+			height:100px;
 			display: inline-block;
                 }
 

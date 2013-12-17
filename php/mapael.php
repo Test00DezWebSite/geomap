@@ -20,6 +20,7 @@ if(count($elems)==1){
     }
 }
 
+
 $norm_country = array();
 
 if($selectiveQuery){
@@ -35,21 +36,73 @@ if($selectiveQuery){
     arsort($countries_temp);
 
     foreach ($countries_temp as $key => $value) {
-        $code = strtoupper($key);
-        $tempcount = 0;
-        if ($norm_country[$code]) {
-            $norm_country[$code]["value"]+=$value;
-            $norm_country[$code]["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $norm_country[$code]["value"].' documents' ;
-        } else {
+        $code = strtoupper($key);        
+        if($CC[$code]){
+            $tempcount = 0;
+            if ($norm_country[$code]) {
+                $norm_country[$code]["value"]+=$value;
+                $norm_country[$code]["tooltip"]["content"] = "" ;
+            } else {
+                $info = array();
+                $info["code"] = $code;
+                $info["value"] = $value;
+                $info["attrs"] = array();
+                $info["attrs"]["href"] = "";
+                $info["tooltip"] = array();
+                $info["tooltip"]["content"] = "";
+                $norm_country[$code] = $info;
+            }
+        }
+    }   
+    $country_divisor=getDivisors($mainpath.$dbname);    
+    foreach ($norm_country as $key => $value){            
+        if($CC[$key]){
+            $finalval=$value["value"]/($country_divisor[$key]+1);
             $info = array();
-            $info["code"] = $code;
-            $info["value"] = $value;
+            $info["code"] = $key;
+            $info["value"] = $value["value"];
+            $info["floatval"] = $finalval;
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$code] . "</span><br/>" . $value.' documents';
-            $norm_country[$code] = $info;
+            $info["tooltip"]["content"] = "";
+            $norm_country[$key] = $info;
         }
+    }
+    
+    $maxzeros=0;
+    foreach ($norm_country as $key => $value) {    
+        $dafloat="".$value["floatval"];
+        $aaa=explode(".", $dafloat);
+        $right=$aaa[1];
+        $thesize=count($right)+1;
+
+        $zerosCount=0;
+        foreach (range(0, $thesize) as $i) {
+            if($right[$i]=="0") $zerosCount+=1;
+        }
+        if($zerosCount>$maxzeros)$maxzeros=$zerosCount;
+    }
+    $maxzeros+=3;//more zeros, more precision!
+    $mult=pow(10,$maxzeros);
+
+    foreach ($norm_country as $key => $value){          
+
+            $realOCC=$value["value"];
+            $floatVal=$value["floatval"];
+            $fakeOCC=ceil($floatVal*$mult);
+
+            $info = array();
+            $info["code"] = $key;
+            $info["realValue"] = $realOCC;
+            $info["percentage"] = round(($floatVal*100),2);
+            $info["value"] = $fakeOCC;
+            $info["attrs"] = array();
+            $info["attrs"]["href"] = "#";
+            $info["tooltip"] = array();
+            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $realOCC.'  documents ('.$info["percentage"].'%)';
+            $norm_country[$key] = $info;
+
     }
 }
 else {
@@ -83,6 +136,9 @@ foreach ($norm_country as $c) {
     }
     array_push($occToCC[$c["value"]], $c["code"]);
 }
+
+
+
 
 krsort($occToCC);
 $countries_occ_DESC = array();
@@ -130,7 +186,15 @@ foreach ($temp as $key => $value) {
             $moreinfo["attr"] = array();
             $moreinfo["attr"]["href"] = "#";
             $moreinfo["tooltip"] = array();
-            $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>" . $value["occ"]. ' documents';
+            if($selectiveQuery){
+                if($norm_country[$j]["realValue"]==1){
+                    $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>" . $norm_country[$j]["realValue"]. ' document ('.$norm_country[$j]["percentage"].'%)';
+                } else {
+                    $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>" . $norm_country[$j]["realValue"]. ' documents ('.$norm_country[$j]["percentage"].'%)';
+                }                    
+            } else {
+                $moreinfo["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$j] . "</span><br/>" . $value["occ"]. ' documents';
+            }
             $thedata[$j] = $moreinfo;
         }
     }
@@ -148,13 +212,48 @@ array_push($theslices, $info);
 $finalarray=array();
 $finalarray["areas"]=$thedata;
 $finalarray["slices"]=$theslices;
+
+if($selectiveQuery){
+    $minInt=100000;
+    $maxInt=0;
+    $minFloat=100000.0;
+    $maxFloat=0.0;
+    foreach ($norm_country as $key => $value) {
+        if($value["realValue"]>$maxInt) $maxInt=$value["realValue"];
+        if($value["realValue"]<$minInt) $minInt=$value["realValue"];
+        if($value["percentage"]>$maxFloat) $maxFloat=$value["percentage"];
+        if($value["percentage"]<$minFloat) $minFloat=$value["percentage"];
+    }
+    $min=$minInt." (".$minFloat."%)";
+    $max=$maxInt." (".$maxFloat."%)";
+}
 $finalarray["min"]=$min;
 $finalarray["max"]=$max;
 
 echo json_encode($finalarray);
 
+function getDivisors($mainpath,$dbnam){    
+    include('countries_iso3166.php');
+    $conn = new PDO("sqlite:" .$mainpath.$dbnam);
+    $sql = "select count(*),data from ISIkeyword GROUP BY data ORDER BY count(*) DESC";
+    $column="data";
+    $country_divisor=array();
+    foreach ($conn->query($sql) as $row) {
+        $code = strtoupper($row[$column]);
+        if($CC[$code]){
+            $tempcount = 0;
+            if ($country_divisor[$code]) {
+                $country_divisor[$code]+=$row["count(*)"];
+            } else {
+                $country_divisor[$code] = $row["count(*)"];
+            }
+        }
+    }
+    return $country_divisor;
+}
+
 function pr($msg) {
-    echo $msg . "<br>";
+    echo $msg . "\n";
 }
 
 ?>
