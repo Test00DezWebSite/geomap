@@ -1,6 +1,9 @@
 <?php
 
 header('Content-Type: application/json');
+/*
+ geomap/php/mapael.php?db=["data/nci/graph.db"]&query=["biomass","fuel","cooperatives","energy use","energy poverty","wind power","clean energy","social business","remote areas","Solar","battery","kerosene lanterns","retailers","lamps","energy production","distribution","grid electricity"]
+ */
 
 include('parameters_details.php');
 include('countries_iso3166.php');
@@ -84,25 +87,38 @@ if($selectiveQuery){
         if($zerosCount>$maxzeros)$maxzeros=$zerosCount;
     }
     $maxzeros+=3;//more zeros, more precision!
+    
     $mult=pow(10,$maxzeros);
-
-    foreach ($norm_country as $key => $value){          
+    $minF=100000.0;
+    $maxF=0.0;
+    foreach ($norm_country as $key => $value){         
 
             $realOCC=$value["value"];
             $floatVal=$value["floatval"];
             $fakeOCC=ceil($floatVal*$mult);
-
+            $percentage=round(($floatVal*100),2);
             $info = array();
             $info["code"] = $key;
             $info["realValue"] = $realOCC;
-            $info["percentage"] = round(($floatVal*100),2);
+            $info["percentage"] = $percentage;
             $info["value"] = $fakeOCC;
             $info["attrs"] = array();
             $info["attrs"]["href"] = "#";
             $info["tooltip"] = array();
-            $info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $realOCC.'  documents ('.$info["percentage"].'%)';
+            //$info["tooltip"]["content"] = "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $realOCC.'  documents ('.$info["percentage"].'%)';
             $norm_country[$key] = $info;
-
+            
+            if($percentage>$maxF) $maxF=$percentage;
+            if($percentage<$minF) $minF=$percentage;
+    }
+    $fmin=$minF;
+    $fmax=100.000000;
+    foreach ($norm_country as $key => $value){
+        $old=$value["percentage"];
+        $new=$old*(($fmax-$fmin)/($maxF-$minF));# da formula!
+        $norm_country[$key]["percentage"]=round($new,2);
+        $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
+        //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
     }
 }
 else {
