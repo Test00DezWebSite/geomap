@@ -168,6 +168,5 @@ CC["EH"]="Western Sahara";
 CC["YE"]="Yemen";
 CC["ZM"]="Zambia";
 CC["ZW"]="Zimbabwe";
-CC["PA"]="Palestine";
 CC["TZ"]="Tanzania";
 
