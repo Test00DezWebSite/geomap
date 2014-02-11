@@ -91,7 +91,7 @@ if($selectiveQuery){
     $mult=pow(10,$maxzeros);
     $minF=100000.0;
     $maxF=0.0;
-    foreach ($norm_country as $key => $value){         
+    foreach ($norm_country as $key => $value){
 
             $realOCC=$value["value"];
             $floatVal=$value["floatval"];
@@ -113,9 +113,17 @@ if($selectiveQuery){
     }
     $fmin=$minF;
     $fmax=100.000000;
+//    pr($fmin);
+//    pr($fmax);
+//    pr($minF);
+//    pr($maxF);
+//    pr("-----");
+//    pr((($fmax-$fmin)/($maxF-$minF))."*");
+//    pr("-----");
+    $constant=(($fmax-$fmin)/($maxF));
     foreach ($norm_country as $key => $value){
         $old=$value["percentage"];
-        $new=$old*(($fmax-$fmin)/($maxF-$minF));# da formula!
+        $new=$old*$constant;# da formula!
         $norm_country[$key]["percentage"]=round($new,2);
         $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
         //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
