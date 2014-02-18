@@ -118,28 +118,15 @@ if($selectiveQuery){
 //    pr($minF);
 //    pr($maxF);
 //    pr("-----");
-    $constant=(($fmax-$fmin)/($maxF-$minF));
-    $flag=false;
+//    pr((($fmax-$fmin)/($maxF-$minF))."*");
+//    pr("-----");
+    $constant=(($fmax-$fmin)/($maxF));
     foreach ($norm_country as $key => $value){
         $old=$value["percentage"];
         $new=$old*$constant;# da formula!
-        if($new>100.0000000) {
-            $flag=true;
-            break;
-        }
         $norm_country[$key]["percentage"]=round($new,2);
         $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
         //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
-    }
-    
-    if($flag){
-        $constant=(($fmax-$fmin)/$maxF);
-        foreach ($norm_country as $key => $value){
-            $old=$value["percentage"];
-            $new=$old*$constant;# da formula!
-            $norm_country[$key]["percentage"]=round($new,2);
-            $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
-        }
     }
 }
 else {
@@ -268,6 +255,7 @@ $finalarray["min"]=$min;
 $finalarray["max"]=$max;
 
 echo json_encode($finalarray);
+//revert
 
 function getDivisors($mainpath,$dbnam){    
     include('countries_iso3166.php');
