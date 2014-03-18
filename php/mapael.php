@@ -30,7 +30,7 @@ if($selectiveQuery){
     $countries_temp=array();
     foreach($elems as $e){
         $sql="SELECT ISIkeyword.data FROM ISIterms,ISIkeyword where ISIterms.data='".$e."' ".
-                     "and ISIterms.id=ISIkeyword.id GROUP BY ISIkeyword.data";
+                     "and ISIterms.id=ISIkeyword.id";
         foreach ($base->query($sql) as $row) {
             if($countries_temp[$row["data"]]) $countries_temp[$row["data"]]+=1;
             else $countries_temp[$row["data"]]=1;
