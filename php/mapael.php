@@ -120,10 +120,9 @@ if($selectiveQuery){
 //    pr("-----");
 //    pr((($fmax-$fmin)/($maxF-$minF))."*");
 //    pr("-----");
-    $constant=(($fmax-$fmin)/($maxF));
+#    $constant=(($fmax-$fmin)/($maxF));
     foreach ($norm_country as $key => $value){
-        $old=$value["percentage"];
-        $new=$old*$constant;# da formula!
+        $new=$value["percentage"];
         $norm_country[$key]["percentage"]=round($new,2);
         $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
         //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
