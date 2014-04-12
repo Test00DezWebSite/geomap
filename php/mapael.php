@@ -4,7 +4,9 @@ header('Content-Type: application/json');
 /*
  geomap/php/mapael.php?db=["data/nci/graph.db"]&query=["biomass","fuel","cooperatives","energy use","energy poverty","wind power","clean energy","social business","remote areas","Solar","battery","kerosene lanterns","retailers","lamps","energy production","distribution","grid electricity"]
  */
-
+/*
+ select count(*) from ISIkeyword GROUP BY data ORDER BY count(*) DESC limit 1
+ */
 include('parameters_details.php');
 include('countries_iso3166.php');
 
@@ -30,7 +32,7 @@ if($selectiveQuery){
     $countries_temp=array();
     foreach($elems as $e){
         $sql="SELECT ISIkeyword.data FROM ISIterms,ISIkeyword where ISIterms.data='".$e."' ".
-                     "and ISIterms.id=ISIkeyword.id";
+                     "and ISIterms.id=ISIkeyword.id GROUP BY ISIkeyword.data";
         foreach ($base->query($sql) as $row) {
             if($countries_temp[$row["data"]]) $countries_temp[$row["data"]]+=1;
             else $countries_temp[$row["data"]]=1;
@@ -61,6 +63,7 @@ if($selectiveQuery){
     foreach ($norm_country as $key => $value){            
         if($CC[$key]){
             $finalval=$value["value"]/($country_divisor[$key]+1);
+//	    pr($key." : ".$value["value"]." / ".($country_divisor[$key]+1)." = ".$finalval);
             $info = array();
             $info["code"] = $key;
             $info["value"] = $value["value"];
@@ -97,6 +100,7 @@ if($selectiveQuery){
             $floatVal=$value["floatval"];
             $fakeOCC=ceil($floatVal*$mult);
             $percentage=round(($floatVal*100),2);
+//	    pr($floatVal." - ".$fakeOCC." - ".$percentage);
             $info = array();
             $info["code"] = $key;
             $info["realValue"] = $realOCC;
@@ -120,11 +124,14 @@ if($selectiveQuery){
 //    pr("-----");
 //    pr((($fmax-$fmin)/($maxF-$minF))."*");
 //    pr("-----");
-#    $constant=(($fmax-$fmin)/($maxF));
+    $constant=(($fmax-$fmin)/($maxF));
+//    pr($constant);
     foreach ($norm_country as $key => $value){
-        $new=$value["percentage"];
+        $old=$value["percentage"];
+        $new=$old;//($fmax-$fmin)*($old-$fmin)/($maxF-$minF)+$fmin;//$old*$constant;# da formula!
         $norm_country[$key]["percentage"]=round($new,2);
         $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
+//	pr($key." : ".$new);
         //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
     }
 }
@@ -174,6 +181,7 @@ foreach ($occToCC as $key => $value) {
 }
 $min=$countries_occ_DESC[count($countries_occ_DESC)-1]["occ"];
 $max=$countries_occ_DESC[0]["occ"];
+//pr($max);
 
 $colors = array();
 include_once("ColourGradient.php");
