@@ -4,9 +4,7 @@ header('Content-Type: application/json');
 /*
  geomap/php/mapael.php?db=["data/nci/graph.db"]&query=["biomass","fuel","cooperatives","energy use","energy poverty","wind power","clean energy","social business","remote areas","Solar","battery","kerosene lanterns","retailers","lamps","energy production","distribution","grid electricity"]
  */
-/*
- select count(*) from ISIkeyword GROUP BY data ORDER BY count(*) DESC limit 1
- */
+
 include('parameters_details.php');
 include('countries_iso3166.php');
 
@@ -29,18 +27,24 @@ if(count($elems)==1){
 $norm_country = array();
 
 if($selectiveQuery){
-    $countries_temp=array();
+    $country_docs=array();
     foreach($elems as $e){
-        $sql="SELECT ISIkeyword.data FROM ISIterms,ISIkeyword where ISIterms.data='".$e."' ".
+        $sql="SELECT ISIkeyword.data,ISIkeyword.id FROM ISIterms,ISIkeyword where ISIterms.data='".$e."' ".
                      "and ISIterms.id=ISIkeyword.id GROUP BY ISIkeyword.data";
         foreach ($base->query($sql) as $row) {
-            if($countries_temp[$row["data"]]) $countries_temp[$row["data"]]+=1;
-            else $countries_temp[$row["data"]]=1;
+            if(!$country_docs[$row["data"]]){
+                $country_docs[$row["data"]]=array();
+            }
+            $country_docs[$row["data"]][$row["id"]]=1;
         }
     }
-    arsort($countries_temp);
-
-    foreach ($countries_temp as $key => $value) {
+    
+    foreach ($country_docs as $key => $value)
+        $country_docs[$key]=count($value);
+    
+    arsort($country_docs);
+    
+    foreach ($country_docs as $key => $value) {
         $code = strtoupper($key);        
         if($CC[$code]){
             $tempcount = 0;
@@ -132,7 +136,7 @@ if($selectiveQuery){
         $norm_country[$key]["percentage"]=round($new,2);
         $norm_country[$key]["tooltip"]["content"]= "<span style='font-weight=bold;'>" . $CC[$key] . "</span><br/>" . $value["realValue"].'  documents ('.round($new,2).'%)';
 //	pr($key." : ".$new);
-        //pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
+//        pr($value["code"].": ".$value["realValue"].", ".$value["percentage"].", div:".($country_divisor[$key]+1));
     }
 }
 else {
@@ -257,6 +261,9 @@ if($selectiveQuery){
     }
     $min=$minInt." (".$minFloat."%)";
     $max=$maxInt." (".$maxFloat."%)";
+//    pr("Results:");
+//    pr("min: ".$min);
+//    pr("max: ".$max);
 }
 $finalarray["min"]=$min;
 $finalarray["max"]=$max;
@@ -283,9 +290,27 @@ function getDivisors($mainpath,$dbnam){
     }
     return $country_divisor;
 }
-
+/* selectiveQuery:
+ * ["NCI"]
+ * query=["rural communities","recruitment","nutritional status","credit","loans",
+ *      "financial support","farm","entrepreneurship","behavior change","micro-finance",
+ *      "tourism","agriculture","local market","sustainable development","self-sustainability",
+ *      "household income","small business owners","start-ups","social entrepreneurship","saw",
+ *      "rice","value chain","ecosystem","economic development","cooperation","income generating projects",
+ *      "social development","adaptation","livestock","capacity building workshops","Diaspora","business support",
+ *      "habitat","business","entrepreneurs","vegetables","conservation","economic growth","low income","youth employment"]
+ * Case: Country KH
+ * SELECT * FROM ISIkeyword where ISIkeyword.data="kh"
+ * 12 documents (493,494,495,496,1465,1466,1467,1468,1993,1994,1995,1996) <= Global Divisor
+ * but:
+ * SELECT * FROM ISIterms,ISIkeyword where ISIkeyword.data="kh" and ISIterms.id=ISIkeyword.id group by ISIterms.data
+ *  96 keywords (one country has * docs, but one doc could have * keywords
+ * so when i'm doing the first loop of all (foreach($elems as $e) inside selectiveQuery)
+ * i count 26 keywords that are associated with KH and: 26 / GlovalDivisor = 26/12 ... mistaaaaake!!
+ */
 function pr($msg) {
     echo $msg . "\n";
 }
 
 ?>
+
