@@ -259,8 +259,8 @@ if($selectiveQuery){
         if($value["percentage"]>$maxFloat) $maxFloat=$value["percentage"];
         if($value["percentage"]<$minFloat) $minFloat=$value["percentage"];
     }
-    $min=$minInt." (".$minFloat."%)";
-    $max=$maxInt." (".$maxFloat."%)";
+    $min=$minFloat."%";
+    $max=$maxFloat."%";
 //    pr("Results:");
 //    pr("min: ".$min);
 //    pr("max: ".$max);
